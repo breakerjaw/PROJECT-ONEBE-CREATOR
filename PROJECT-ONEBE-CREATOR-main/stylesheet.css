@@ -1019,7 +1019,9 @@ footer {
 }
 
 .social-icon.youtube:hover {
-    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+    background: #25f4ee;
+    color: #000;
+    box-shadow: 0 8px 25px rgba(37, 244, 238, 0.4);
     transform: translateY(-10px) scale(1.1);
 }
 
@@ -1085,7 +1087,8 @@ footer {
 }
 
 .footer-social-icon.youtube:hover {
-    background: #ff0000;
+    background: #25f4ee;
+    color: #000;
 }
 
 .footer-social-icon.twitter:hover {
