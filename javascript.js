@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
-            targetSection.scrollIntoView({ behavior: 'smooth' });
+            if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth' });
         });
     });
 
@@ -35,29 +35,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    // Observe all skill cards (guarded) - removed as skills section doesn't exist
-
-    // Observe all struktur cards
+    // Observe struktur cards
     document.querySelectorAll('.struktur-card').forEach(card => {
         observer.observe(card);
     });
 
-    // Observe all student cards
+    // Observe student cards
     document.querySelectorAll('.student-card').forEach(card => {
         observer.observe(card);
     });
 
-    // Observe all project cards
+    // Observe project cards
     document.querySelectorAll('.project').forEach(project => {
         observer.observe(project);
     });
 
-    // Observe all album items
+    // Observe album items
     document.querySelectorAll('.album-item').forEach(item => {
         observer.observe(item);
     });
-	
-	const headerBg = document.querySelector("header .parallax-bg");
 
     // Add hover effect to navigation
     navLinks.forEach(link => {
@@ -66,27 +62,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Parallax effect on header — disabled on small screens for performance/usability
-    const mq = window.matchMedia("(max-width: 768px)");
-
-    function parallaxScroll() {
-        if (!headerBg) return;
-        const scrollTop = window.pageYOffset;
-        headerBg.style.transform = `translateY(${scrollTop * 0.25}px)`;
-    }
-
-    function updateParallax() {
-        if (mq.matches) {
-            headerBg.style.transform = "translateY(0)";
-            window.removeEventListener("scroll", parallaxScroll);
-        } else {
-            window.addEventListener("scroll", parallaxScroll);
+    // --- SAFE PARALLAX: apply to welcome image/area, NOT header ---
+    // Previous implementation moved the <header> itself which made the header disappear on scroll.
+    // New approach: parallax transforms a non-sticky element (.welcome-photo / .welcome-img).
+    const enableParallax = !window.matchMedia('(max-width: 768px)').matches;
+    if (enableParallax) {
+        const parallaxTarget = document.querySelector('.welcome-photo') || document.querySelector('.welcome-img') || null;
+        if (parallaxTarget) {
+            const onParallax = () => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                // small, subtle parallax on welcome image for visual depth
+                parallaxTarget.style.transform = `translateY(${Math.min(scrollTop * 0.15, 120)}px)`;
+                parallaxTarget.style.willChange = 'transform';
+            };
+            // initialize and attach
+            onParallax();
+            window.addEventListener('scroll', onParallax, { passive: true });
         }
+    } else {
+        // ensure any previous transforms are reset on small screens
+        const parallaxTarget = document.querySelector('.welcome-photo') || document.querySelector('.welcome-img');
+        if (parallaxTarget) parallaxTarget.style.transform = 'translateY(0)';
     }
-
-    updateParallax();
-
-    mq.addEventListener("change", updateParallax);
 
     // Add ripple effect on button clicks
     const buttons = document.querySelectorAll('button, .btn');
@@ -108,8 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => ripple.remove(), 600);
         });
     });
-
-
 
     // Mobile optimization: Reduce animations on mobile devices
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
