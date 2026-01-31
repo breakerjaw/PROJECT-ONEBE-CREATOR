@@ -1,0 +1,21 @@
+{
+  "name": "x-dkv-two-website",
+  "version": "1.0.0",
+  "description": "Official website for X DKV TWO Class",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --host=localhost --open=/",
+    "dev": "live-server --port=3000 --host=localhost --open=/ --browser=chrome"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "keywords": [
+    "school",
+    "class",
+    "dkv",
+    "website"
+  ],
+  "author": "X DKV TWO Class",
+  "license": "MIT"
+}
