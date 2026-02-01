@@ -16,7 +16,7 @@
     --text-accent: #d32f2f;
     --text-white: #fff;
     --border-color: #e0e0e0;
-    --shadow-color: rgba(211, 47, 47, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.3);
     --shadow-hover: rgba(211, 47, 47, 0.25);
     --header-bg: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
     --footer-bg: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
@@ -36,7 +36,7 @@
     --text-accent: #ff6f6f;
     --text-white: #e0e0e0;
     --border-color: #333;
-    --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-color: rgba(211, 47, 47, 0.1);
     --shadow-hover: rgba(0, 0, 0, 0.5);
     --header-bg: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
     --footer-bg: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
@@ -231,7 +231,7 @@ nav {
     display: flex;
     align-items: center;
     gap: 12px;
-    background: var();
+    background: linear-gradient(135deg, #b71c1c 0%, #d32f2f 100%);
     padding: 12px 18px;
     border-radius: 8px;
     font-weight: 700;
@@ -253,12 +253,20 @@ nav {
 }
 
 nav ul {
-    list-style: none;
     display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 12px;
+	margin: 0 auto;
+	list-style: none;
 }
 
 nav ul li {
     margin-left: 20px;
+	flex: 0 0 auto;
+	width: auto;
+	text-align: center;
+	box-sizing: border-box;
 }
 
 nav a {
@@ -324,7 +332,6 @@ section p {
 #welcome {
     /*background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);*/
     background: var(--bg-primary);
-    border-top: 5px solid #d32f2f;
 }
 
 .welcome-card {
@@ -1196,4 +1203,3 @@ footer {
 .p {
     color: var(--bg-card)
 }
-
