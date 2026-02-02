@@ -93,7 +93,7 @@ nav {
     display: flex;
     align-items: center;
     gap: 12px;
-    background: linear-gradient(135deg, #b71c1c 0%, #d32f2f 100%);
+    background: var(--header-bg);
     padding: 12px 18px;
     border-radius: 8px;
     font-weight: 700;
