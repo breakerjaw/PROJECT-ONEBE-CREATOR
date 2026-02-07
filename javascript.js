@@ -142,4 +142,21 @@ document.addEventListener('DOMContentLoaded', function() {
             el.style.animation = 'none';
         });
     }
+
+    // Menu toggle functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', function() {
+        sidebar.classList.toggle('open');
+    });
+
+    // Function to scroll to section
+    window.scrollToSection = function(targetId) {
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+            sidebar.classList.remove('open'); // Close sidebar after clicking
+        }
+    };
 });
